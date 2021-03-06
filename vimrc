@@ -69,7 +69,7 @@ if has("autocmd")
     " 记录上次修改文件的位置
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
     " 关闭换行自动补全注释符
-    autocmd FileType * setlocal formatoptions==c fo==r fo==o
+    "autocmd FileType * setlocal formatoptions==c fo==r fo==o
     " 设置loclist 和 quickfix在跨越底部栏显示
     autocmd FileType qf wincmd J
     " 当NerdTree 为剩下唯一窗口是自动关闭
