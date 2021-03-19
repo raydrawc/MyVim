@@ -44,7 +44,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                 " 异步模糊搜索插件  必须先装fzf插件
 
 " Plug 'vim-scripts/L9'
-Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'          " 美化导航栏
 Plug 'vim-airline/vim-airline-themes'   " 导航栏主题
 "更高效的移动 [,, + w/fx/h/j/k/l]
@@ -65,15 +64,16 @@ Plug 'mhinz/vim-startify'               " 初始化界面
 
 
 if count(g:plug_groups, 'markdown')
-    Plug 'plasticboy/vim-markdown', {'for': 'md'}
+    " Plug 'plasticboy/vim-markdown', {'for': 'md'}
     " https://github.com/suan/vim-instant-markdown
     " npm -g install instant-markdown-d
     " Plug 'suan/vim-instant-markdown'
     " let g:instant_markdown_slow = 1
     " let g:instant_markdown_autostart = 0
     " map <F12> :InstantMarkdownPreview<CR>
-    Plug 'iamcco/mathjax-support-for-mkdp',{'for': 'markdown'}
-    Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
+    " Plug 'iamcco/mathjax-support-for-mkdp',{'for': 'markdown'}
+    " Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
+    Plug 'skanehira/preview-markdown.vim'
 " Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 endif
 
@@ -117,10 +117,10 @@ let g:NERDDefaultAlign = 'left'         " 设置注释对齐方式 (左对齐)
 map <C=_> <Plug>NERDCommenterToggle
 
 " 插件 scroloose/nerdtree =====================================
-nmap <f1> :NERDTreeToggle<cr>
-nmap <C=t> :NERDTreeToggle<CR>
-imap <F1> <esc>:NERDTreeToggle<CR>
-imap <C=t> <esc>:NERDTreeToggle<CR>
+nmap <f2> :NERDTreeToggle<cr>
+nmap <C-t> :NERDTreeToggle<CR>
+imap <F2> <esc>:NERDTreeToggle<CR>
+imap <C-t> <esc>:NERDTreeToggle<CR>
 
 " let NERDTreeShowHidden=1            " 设置显示隐藏文件
 let NERDTreeIgnore=[ '\.(swp|svn|pyc)$' ,'\.(png|dll|so|exe)$' , '\.(git|svn)' , '\.(beam)']
