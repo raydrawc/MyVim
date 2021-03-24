@@ -73,8 +73,14 @@ if count(g:plug_groups, 'markdown')
     " map <F12> :InstantMarkdownPreview<CR>
     " Plug 'iamcco/mathjax-support-for-mkdp',{'for': 'markdown'}
     " Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
+    " Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+    
+
+    "
+    " Requirements
+    " * MichaelMure/mdr or specified markdown parser
+    " *Vim 8.1.1401 ~
     Plug 'skanehira/preview-markdown.vim'
-" Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 endif
 
 " go 语言加载项

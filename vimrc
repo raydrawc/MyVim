@@ -9,8 +9,8 @@
 " =============================================================
 " Initial Plugin 加载插件
 " =============================================================
-if filereadable(expand("~/.vimrc.plug.vim"))
-    source ~/.vimrc.plug.vim
+if filereadable(expand("~/.vimplug.vim"))
+    source ~/.vimplug.vim
 endif
 
 " =============================================================

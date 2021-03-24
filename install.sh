@@ -52,9 +52,9 @@ lnif() {
 echo "Step1: backing up current vim config"
 today=`date +%Y%m%d`
 if $FOR_VIM; then
-    for i in $HOME/.vim $HOME/.vimrc $HOME/.gvimrc $HOME/.vimrc.plug.vim;
+    for i in $HOME/.vim $HOME/.vimrc $HOME/.gvimrc $HOME/.vimplug.vim;
     do [ -e $i ] && [ ! -L $i ] && mv $i $i.$today; done
-    for i in $HOME/.vim $HOME/.vimrc $HOME/.gvimrc $HOME/.vimrc.plug.vim;
+    for i in $HOME/.vim $HOME/.vimrc $HOME/.gvimrc $HOME/.vimplug.vim;
     do [ -L $i ] && unlink $i ; done
 fi
 if $FOR_NEOVIM; then
@@ -67,7 +67,7 @@ fi
 echo "Step2: setting up symlinks"
 if $FOR_VIM; then
     lnif $CURRENT_DIR/vimrc $HOME/.vimrc
-    lnif $CURRENT_DIR/vimrc.plug.vim $HOME/.vimrc.plug.vim
+    lnif $CURRENT_DIR/vimplug.vim $HOME/.vimplug.vim
     lnif "$CURRENT_DIR/" "$HOME/.vim"
 fi
 if $FOR_NEOVIM; then
@@ -79,9 +79,9 @@ echo "Step3: update/install plugins using Vim-plug"
 system_shell=$SHELL
 export SHELL="/bin/sh"
 if $FOR_VIM; then
-    vim -u $HOME/.vimrc.plug.vim +PlugInstall! +PlugClean! +qall
+    vim -u $HOME/.vimplug.vim +PlugInstall! +PlugClean! +qall
 else
-    nvim -u $HOME/.vimrc.plug.vim +PlugInstall! +PlugClean! +qall
+    nvim -u $HOME/.vimplug.vim +PlugInstall! +PlugClean! +qall
 fi
 export SHELL=$system_shell
 
