@@ -25,8 +25,8 @@ set number                          " 显示行号
 set history=500                     " 设置操作历史容量
 set mouse=a                         " 支持鼠标点击
 "set autoread                        " 文件修改后自动载入 :e 手动载入
-colorscheme desert                  " 设置配色方案
-" colorscheme onedark                  " 设置配色方案
+"colorscheme desert                  " 设置配色方案
+colorscheme onedark                  " 设置配色方案
 
 syntax enable                       " 语法识别
 syntax on                           " 语法高亮

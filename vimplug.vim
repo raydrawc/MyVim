@@ -35,9 +35,7 @@ endif
 " Group dependencies, vim-snippets depends on ultisnips
 " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
 " Snippets are separated from the engine. Add this if you want them:
-Plug 'SirVer/ultisnips'                 " 代码片段主函数
 " Plug 'honza/vim-snippets'               " 代码片段集合
-
 Plug 'Raimondi/delimitMate'             " 自动补全括号等
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -49,10 +47,10 @@ Plug 'vim-airline/vim-airline-themes'   " 导航栏主题
 "更高效的移动 [,, + w/fx/h/j/k/l]
 Plug 'easymotion/vim-easymotion'        " 快速跳转工具
 " Plug 'rking/ag.vim'                     " 高速文件内容搜索，需要先安装'ag(the_silver_searcher)'命令
+Plug 'maralla/completor.vim'            " 智能提醒
 Plug 'Yggdroot/indentLine'              " 显示缩进 “线”
-Plug 'maralla/completor.vim'            " 自动补全
 Plug 'scrooloose/nerdcommenter'         " 快速注释
-Plug 'scrooloose/nerdtree'              " 文件管理树 r 刷新
+Plug 'scrooloose/nerdtree',{ 'on':  'NERDTreeToggle' } " 文件管理树 r 刷新
 Plug 'Xuyuanp/nerdtree-git-plugin'      " nerdtree 显示 git 最新修改标志
 Plug 'joshdick/onedark.vim'             " 配色方案 onedrak
 Plug 'mhinz/vim-signify'
@@ -64,23 +62,14 @@ Plug 'mhinz/vim-startify'               " 初始化界面
 
 
 if count(g:plug_groups, 'markdown')
-    " Plug 'plasticboy/vim-markdown', {'for': 'md'}
-    " https://github.com/suan/vim-instant-markdown
-    " npm -g install instant-markdown-d
-    " Plug 'suan/vim-instant-markdown'
-    " let g:instant_markdown_slow = 1
-    " let g:instant_markdown_autostart = 0
-    " map <F12> :InstantMarkdownPreview<CR>
-    " Plug 'iamcco/mathjax-support-for-mkdp',{'for': 'markdown'}
-    " Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
-    " Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
     
 
     "
     " Requirements
     " * MichaelMure/mdr or specified markdown parser
     " *Vim 8.1.1401 ~
-    Plug 'skanehira/preview-markdown.vim'
+    " 按需加载 markdown
+    Plug 'skanehira/preview-markdown.vim', {'for' : 'markdown'} 
 endif
 
 " go 语言加载项
@@ -118,9 +107,9 @@ let g:NERDSpaceDelims = 1        " 在注释后加空格
 let g:NERDToggleCheckAllLines = 1   " 检查选中行是否已注释
 " 自定义注释
 let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' }, 'erlang': {'left' : '%%' } }
-let g:NERDDefaultAlign = 'left'         " 设置注释对齐方式 (左对齐)
+let g:NERDDefaultAlign = 'left'         " 设置注释对齐方式 (左对齐) 方便删除
 " ctrl + / 快速注释 （ctrl + / 映射为 ctrl + _）
-map <C=_> <Plug>NERDCommenterToggle
+map <C-/> <Plug>NERDCommenterToggle
 
 " 插件 scroloose/nerdtree =====================================
 nmap <f2> :NERDTreeToggle<cr>
@@ -194,9 +183,5 @@ nmap <leader>gk <plug>(signify=prev=hunk)
 " ==== [ easymotion/vim=easymotion ] ================================
 map <Leader><leader>h <Plug>(easymotion=linebackward)
 map <Leader><leader>l <Plug>(easymotion=lineforward)
-
-
-" ==== [ markdown=preview ] ================================
-" let g:mkdp_path_to_chrome = "/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe"
 
 
