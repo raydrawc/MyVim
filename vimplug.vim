@@ -122,18 +122,13 @@ let NERDTreeIgnore=[ '\.(swp|svn|pyc)$' ,'\.(png|dll|so|exe)$' , '\.(git|svn)' ,
 
 " ==== [ 插件 junegunn/fzf ] =======================================
 let g:fzf_layout = {'down': '~20%'}
+set rtp+=~/.fzf
 noremap <leader>f :FZF
-noremap <leader>ff :FZF<CR>             " 搜索当前目录下所有文件
-noremap <leader>fb :Buffers<CR>         " 搜索buffs
-noremap <leader>fl :BLines<CR>          " 当前buff搜索内容
 " 快速启动Ag rg搜索
 noremap <leader>fa :Ag
 noremap <leader>fr :Rg
 
 " 快速搜索工作区
-noremap <leader>f1 :FZF /data/xxwy.dev/server<cr>
-noremap <leader>f2 :FZF /data/xxwy.dev/tools<cr>
-noremap <leader>f3 :FZF /data/xxwy.dev/data<cr>
 
 " ==== [ 插件 w0rp/ale ] =====================================
 "显示Linter名称,出错或警告等相关信息
