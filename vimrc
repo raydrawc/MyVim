@@ -77,19 +77,17 @@ if count(g:plug_groups, 'golang')
     " 1. vim a.go
     " 2. :GoInstallBinaries
     " vimgo  https://github.com/fatih/vim-go
-    "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " GO语言辅助包
-    " Plug 'fatih/vim-go', {'for': 'go'}
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' } " GO语言辅助包
     Plug 'majutsushi/tagbar'
-    Plug 'govim/govim'
-    Plug 'volgar1x/vim-gocode'
+    " Plug 'govim/govim'
+    " Plug 'volgar1x/vim-gocode'
 
-    nmap <silent> <buffer> <Leader>h : <C-u>call GOVIMHover()<CR>
+    " nmap <silent> <buffer> <Leader>h : <C-u>call GOVIMHover()<CR>
     set timeoutlen=1000 ttimeoutlen=0
-
 
 endif
 
-" go 语言加载项
+" erlang 语言加载项
 if count(g:plug_groups, 'erlang')
     Plug 'vim-erlang/vim-erlang-omnicomplete' " 语法提示
     Plug 'vim-erlang/vim-erlang-tags'
@@ -99,8 +97,6 @@ endif
 
 
 call plug#end()
-
-
 
 
 " =============================================================
@@ -139,7 +135,7 @@ set nobackup                        " 不创建备份文件
 set noswapfile                      " 不创建减缓文件
 set undofile                        " 保留撤销历史
 
-set cursorline                      " 设置当前行高亮
+" set cursorline                      " 设置当前行高亮
 "set cursorcolumn                    " 设置当前列高亮
 
 " 修复ctrl+m 多光标操作选择的bug，但是改变了ctrl+v进行字符选中时将包含光标下的字符
@@ -331,9 +327,6 @@ set wildignore+=*.unity3d,*.prefab,*.unity,*.asset,*.mat,*.meta
 " 回车即选中当前项
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 
-autocmd! BufEnter,BufNewFile *.go,go.mod syntax on
-autocmd! BufLeave *.go,go.mod syntax off
-
 if has("patch-8.1.1904")
   set completeopt+=popup
   set completepopup=align:menu,border:off,highlight:Pmenu
@@ -425,15 +418,15 @@ map <leader>ln :lnext<cr>
 map <leader>lp :lprevious<cr>
 
 " quickfix
-" function! ToggleQuickFix()
-"     if empty(filter(getwininfo(), 'v:val.quickfix'))
-"         copen
-"     else
-"         cclose
-"     endif
-" endfunction
+function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+    else
+        cclose
+    endif
+endfunction
 
-" nnoremap <silent> <F2> :call ToggleQuickFix()<cr>
+nnoremap <silent> <F4> :call ToggleQuickFix()<cr>
 
 map <leader>qq :copen<cr>
 map <leader>qo :copen<cr>
@@ -449,7 +442,6 @@ nnoremap <F1> <Esc>
 
 " 打开vimrc快捷键
 nnoremap <leader>ev  :split $MYVIMRC<cr>
-nnoremap <leader>ev  :split ~/.zshrc<cr>
 " 运行当前vimrc脚本
 nnoremap <leader>sv  :source $MYVIMRC<cr>
 
@@ -510,6 +502,7 @@ nmap <leader>r :NERDTreeToggle<CR>
 
 let NERDTreeShowHidden=1            " 设置显示隐藏文件
 let NERDTreeIgnore=[ '\.(swp|svn|pyc)$' ,'\.(png|dll|so|exe)$' , '\.(git|svn)' , '\.(beam)']
+let g:NERDTreeNodeDelimiter = "\u00a0"
 
 " ==== [ 插件 junegunn/fzf ] =======================================
 let g:fzf_layout = {'down': '~20%'}
