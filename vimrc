@@ -43,7 +43,7 @@ Plug 'junegunn/fzf.vim'                 " 异步模糊搜索插件  必须先装
 Plug 'vim-airline/vim-airline'          " 美化导航栏
 Plug 'vim-airline/vim-airline-themes'   " 导航栏主题
 "更高效的移动 [,, + w/fx/h/j/k/l]
-Plug 'easymotion/vim-easymotion'        " 快速跳转工具
+" Plug 'easymotion/vim-easymotion'        " 快速跳转工具
 " Plug 'rking/ag.vim'                     " 高速文件内容搜索，需要先安装'ag(the_silver_searcher)'命令
 Plug 'maralla/completor.vim'            " 智能提醒
 Plug 'Yggdroot/indentLine'              " 显示缩进 “线”
@@ -58,7 +58,9 @@ Plug 'tpope/vim-fugitive'               " vim 操作 git 并显示分支
 Plug 'luochen1990/rainbow'              " 括号颜色
 Plug 'mhinz/vim-startify'               " 初始化界面
 Plug 'kana/vim-fakeclip'                " vim 复制文本
-
+" Plug 'Valloric/YouCompleteMe'           " 代码自动完成
+"
+"
 if count(g:plug_groups, 'markdown')
 
     "
@@ -76,9 +78,15 @@ if count(g:plug_groups, 'golang')
     " 2. :GoInstallBinaries
     " vimgo  https://github.com/fatih/vim-go
     "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " GO语言辅助包
-    Plug 'fatih/vim-go', {'for': 'go'}
+    " Plug 'fatih/vim-go', {'for': 'go'}
     Plug 'majutsushi/tagbar'
     Plug 'govim/govim'
+    Plug 'volgar1x/vim-gocode'
+
+    nmap <silent> <buffer> <Leader>h : <C-u>call GOVIMHover()<CR>
+    set timeoutlen=1000 ttimeoutlen=0
+
+
 endif
 
 " go 语言加载项
@@ -107,6 +115,8 @@ set number                          " 显示行号
 set history=500                     " 设置操作历史容量
 " 设置 =a 会使得mintty复制功能失效
 set mouse-=a                         " 支持鼠标点击
+set ttymouse=sgr
+
 "set autoread                        " 文件修改后自动载入 :e 手动载入
 "colorscheme desert                  " 设置配色方案
 colorscheme onedark                  " 设置配色方案
@@ -158,6 +168,10 @@ if has("autocmd")
     " 当NerdTree 为剩下唯一窗口是自动关闭
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 endif
+
+set updatetime=500
+set balloondelay=250
+
 
 "==========================================
 " Display Settings 展示/排版等界面格式设置
@@ -312,12 +326,18 @@ set wildignore+=*.png,*.bmp,*.jpg,*.jpeg,*.FBX,*.tga
 set wildignore+=*.unity3d,*.prefab,*.unity,*.asset,*.mat,*.meta
 
 " 离开插入模式后自动关闭预览窗口
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " 回车即选中当前项
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 
+autocmd! BufEnter,BufNewFile *.go,go.mod syntax on
+autocmd! BufLeave *.go,go.mod syntax off
 
+if has("patch-8.1.1904")
+  set completeopt+=popup
+  set completepopup=align:menu,border:off,highlight:Pmenu
+endif
 " =============================================================
 " HostKey 键位设置
 " =============================================================
@@ -405,6 +425,16 @@ map <leader>ln :lnext<cr>
 map <leader>lp :lprevious<cr>
 
 " quickfix
+" function! ToggleQuickFix()
+"     if empty(filter(getwininfo(), 'v:val.quickfix'))
+"         copen
+"     else
+"         cclose
+"     endif
+" endfunction
+
+" nnoremap <silent> <F2> :call ToggleQuickFix()<cr>
+
 map <leader>qq :copen<cr>
 map <leader>qo :copen<cr>
 map <leader>qw :copen<cr>
@@ -415,7 +445,7 @@ map <leader>qp :cprevious<cr>
 
 " F1 废弃这个键,防止调出系统帮助
 " I can type :help on my own, thanks.  Protect your fat fingers from the evils of <F1>
-noremap <F1> <Esc>"
+nnoremap <F1> <Esc>
 
 " 打开vimrc快捷键
 nnoremap <leader>ev  :split $MYVIMRC<cr>
@@ -470,11 +500,12 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' }, 'erlang': {
 let g:NERDDefaultAlign = 'left'         " 设置注释对齐方式 (左对齐) 方便删除
 " ctrl + / 快速注释 （ctrl + / 映射为 ctrl + _）
 map <C-/> <Plug>NERDCommenterToggle
+map <leader>/ <Plug>NERDCommenterToggle
 
 " 插件 scroloose/nerdtree =====================================
 nmap <C-t> :NERDTreeToggle<CR>
 imap <C-t> <esc>:NERDTreeToggle<CR>
-" nmap <leader>t :NERDTreeToggle<CR>
+nmap <leader>r :NERDTreeToggle<CR>
 
 
 let NERDTreeShowHidden=1            " 设置显示隐藏文件
@@ -538,8 +569,10 @@ nmap <leader>gj <plug>(signify=next=hunk)
 nmap <leader>gk <plug>(signify=prev=hunk)
 
 " ==== [ easymotion/vim=easymotion ] ================================
-map <Leader><leader>h <Plug>(easymotion=linebackward)
-map <Leader><leader>l <Plug>(easymotion=lineforward)
+" map <Leader><leader>h <Plug>(easymotion=linebackward)
+" map <Leader><leader>l <Plug>(easymotion=lineforward)
 
 
 
+" go代码提示
+imap <C-i> <C-x><C-o>
