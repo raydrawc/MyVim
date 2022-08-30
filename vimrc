@@ -110,7 +110,7 @@ set nocompatible                    " 关闭vi兼容模式
 set number                          " 显示行号
 set history=500                     " 设置操作历史容量
 " 设置 =a 会使得mintty复制功能失效
-set mouse-=a                         " 支持鼠标点击
+set mouse=a                          " 支持鼠标点击
 set ttymouse=sgr
 
 "set autoread                        " 文件修改后自动载入 :e 手动载入
@@ -364,9 +364,9 @@ nmap <leader>wh <esc>:vertical resize =3<CR>
 " tab
 " map <c=tab> :tabnext<cr>        " gt
 " map <c=s=tab> :tabprevious<cr>  " gT
-map <leader>tn :tabnew ./<cr>
-map <leader>tc :tabclose<cr>
-map <leader>te :tabe<cr>
+" map <leader>tn :tabnew ./<cr>
+" map <leader>tc :tabclose<cr>
+" map <leader>te :tabe<cr>
 
 " normal模式下切换到确切的tab
 noremap <leader>1 1gt
@@ -497,7 +497,7 @@ map <leader>/ <Plug>NERDCommenterToggle
 " 插件 scroloose/nerdtree =====================================
 nmap <C-t> :NERDTreeToggle<CR>
 imap <C-t> <esc>:NERDTreeToggle<CR>
-nmap <leader>r :NERDTreeToggle<CR>
+nmap <leader>t :NERDTreeToggle<CR>
 
 
 let NERDTreeShowHidden=1            " 设置显示隐藏文件
@@ -565,7 +565,9 @@ nmap <leader>gk <plug>(signify=prev=hunk)
 " map <Leader><leader>h <Plug>(easymotion=linebackward)
 " map <Leader><leader>l <Plug>(easymotion=lineforward)
 
+" === [GO语言配置]  ============================================
+" au FileType go nmap <leader>rt <Plug>(go-run-tab)
+au FileType go nmap <leader>rs <Plug>(go-run-split)
+au FileType go nmap <leader>rv <Plug>(go-run-vertical)
 
-
-" go代码提示
-imap <C-i> <C-x><C-o>
+let g:go_imports_autosave = 0       " 暂时不自动移除多余函数
